@@ -232,7 +232,7 @@ struct UpdateKernel
             problemSize
         );
         LLAMA_INDEPENDENT_DATA
-        for ( std::size_t b = 0; b < problemSize / blockSize; ++b )
+        for ( std::size_t b = 0; b < ( problemSize + blockSize -1 ) / blockSize; ++b )
         {
             auto const start2 = b * blockSize;
             auto const   end2 = alpaka::math::min(
