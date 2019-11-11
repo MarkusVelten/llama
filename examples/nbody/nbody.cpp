@@ -248,6 +248,8 @@ struct UpdateKernel
                 pos2 += threads
             )
                 temp(pos2 + threadIndex) = particles( start2 + pos2 + threadIndex );
+
+            syncBlockThreads(acc);
 #endif // NBODY_USE_SHARED
             LLAMA_INDEPENDENT_DATA
             for ( auto pos2 = decltype(end2)(0); pos2 < end2; ++pos2 )
@@ -262,6 +264,7 @@ struct UpdateKernel
 #endif // NBODY_USE_SHARED
                         ts
                     );
+            syncBlockThreads(acc);
         };
     }
 };
